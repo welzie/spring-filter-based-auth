@@ -1,11 +1,11 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.5.RELEASE'
+		springBootVersion = '2.0.2.RELEASE'
 	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}
 }
@@ -14,24 +14,28 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
-repositories {
-	mavenCentral()
+jar {
+    baseName = 'app'
+    version = '0.0.1-SNAPSHOT'
 }
 
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.security:spring-security-crypto')
-	compile('mysql:mysql-connector-java')
-	runtime('org.springframework.boot:spring-boot-devtools')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+	runtime("org.springframework.boot:spring-boot-devtools:${springBootVersion}")
+
+	compile('org.springframework.security:spring-security-crypto:5.0.6.RELEASE')
+	compile('mysql:mysql-connector-java:5.1.46')
 }
 
 bootRun {
-	addResources = true
+	sourceResources sourceSets.main
 }

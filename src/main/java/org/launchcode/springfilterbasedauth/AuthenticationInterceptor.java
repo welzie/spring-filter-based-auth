@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by LaunchCode
@@ -33,9 +34,9 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             Integer userId = (Integer) request.getSession().getAttribute(AbstractController.userSessionKey);
 
             if (userId != null) {
-                User user = userDao.findOne(userId);
+                Optional<User> user = userDao.findById(userId);
 
-                if (user != null)
+                if (user.isPresent())
                     return true;
             }
 
